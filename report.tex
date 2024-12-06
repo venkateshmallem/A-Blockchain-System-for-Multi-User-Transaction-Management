@@ -1,0 +1,171 @@
+\documentclass[sigconf]{acmart}
+
+\title{A Simple Blockchain System for Multi-User Transaction Management}
+
+\author{Mahesh}
+\affiliation{
+  \institution{Your Institution or Affiliation}
+  \streetaddress{Street Address}
+  \city{City Name}
+  \country{Country}
+  \postcode{Postal Code}
+}
+\email{mahesh@example.com}
+
+\author{Venkatesh}
+\affiliation{
+  \institution{Your Institution or Affiliation}
+  \streetaddress{Street Address}
+  \city{City Name}
+  \country{Country}
+  \postcode{Postal Code}
+}
+\email{venkatesh@example.com}
+
+\author{Varma}
+\affiliation{
+  \institution{Your Institution or Affiliation}
+  \streetaddress{Street Address}
+  \city{City Name}
+  \country{Country}
+  \postcode{Postal Code}
+}
+\email{varma@example.com}
+
+\begin{document}
+
+\begin{abstract}
+This project implements a simple blockchain system using Python that supports multiple users for creating transactions, generating blocks, and validating the chain. The blockchain utilizes a proof-of-work mechanism for mining blocks, simulating a decentralized system to record transactions. This system showcases how blockchain operates in a basic context with multiple users, transactions, and block validation.
+\end{abstract}
+
+\keywords{Blockchain, Proof-of-Work, Transactions, Mining, Python, Multi-User System, Data Integrity}
+
+\maketitle
+
+\section{Introduction}
+
+Blockchain technology underpins many modern digital currencies and is gaining traction in various industries such as finance, supply chain management, and healthcare. The core idea of blockchain is to provide a decentralized, immutable ledger that securely records transactions. This project focuses on implementing a basic blockchain system using Python, allowing multiple users to generate transactions, mine blocks, and validate the integrity of the blockchain. 
+
+The objectives of this project are:
+\begin{itemize}
+    \item To demonstrate how blockchain systems handle transactions and blocks.
+    \item To implement the proof-of-work algorithm for block mining.
+    \item To validate the integrity of the blockchain to prevent tampering.
+\end{itemize}
+
+\section{Related Work}
+
+Blockchain technology has been widely researched and implemented in various fields. Nakamoto (2008) introduced the Bitcoin blockchain, which utilizes a proof-of-work consensus mechanism to ensure secure and verifiable transactions without a central authority. Subsequently, Ethereum introduced more sophisticated concepts, including smart contracts \cite{buterin2013next}.
+
+This project builds on foundational blockchain concepts by providing a simple, Python-based implementation that can be used for educational purposes to understand the core mechanisms of blockchain systems.
+
+\section{System Design}
+
+\subsection{Blockchain Architecture}
+The blockchain consists of a series of blocks, where each block contains:
+\begin{itemize}
+    \item \textbf{index}: The position of the block in the chain.
+    \item \textbf{previous\_hash}: The hash of the preceding block.
+    \item \textbf{timestamp}: The time the block was created.
+    \item \textbf{data}: The transactions stored in the block.
+    \item \textbf{proof}: A proof-of-work value to secure the block.
+\end{itemize}
+The blockchain system also includes a genesis block (the first block), and each subsequent block is linked to the previous one via the \texttt{previous\_hash}.
+
+\subsection{Proof-of-Work Algorithm}
+To add a new block to the blockchain, the system uses a proof-of-work algorithm. This involves finding a proof value such that when combined with the previous block's proof, the resulting hash meets a specific condition (e.g., starting with \texttt{0000}). This ensures that adding new blocks requires significant computational work, which secures the blockchain from tampering.
+
+\subsection{Transaction Management}
+Users can create transactions which are added to a pending transaction pool. A miner will then select these pending transactions and add them to the next block, which is mined using the proof-of-work algorithm.
+
+\section{Implementation}
+
+The project is implemented using Python 3, utilizing the following libraries:
+\begin{itemize}
+    \item \texttt{hashlib}: To generate cryptographic hashes for the blocks.
+    \item \texttt{time}: To track timestamps for each block.
+    \item \texttt{json}: To serialize block data for hashing.
+\end{itemize}
+
+\subsection{Block Class}
+The \texttt{Block} class represents a block in the blockchain. It contains methods to calculate its hash and includes properties like \texttt{index}, \texttt{previous\_hash}, \texttt{data}, and \texttt{proof}.
+
+\subsection{Blockchain Class}
+The \texttt{Blockchain} class manages the blockchain. It supports:
+\begin{itemize}
+    \item Creating the genesis block.
+    \item Adding new blocks after mining them using the \texttt{proof\_of\_work} method.
+    \item Validating the blockchain to ensure data integrity.
+\end{itemize}
+
+\subsection{User Class}
+The \texttt{User} class represents users who can send transactions. These transactions are stored in the blockchain's pending transaction pool.
+
+\section{Results}
+
+\subsection{Example 1: Mining and Transaction Handling}
+\begin{verbatim}
+Mining Block 1...
+Mining Block 2...
+\end{verbatim}
+This output demonstrates the mining process where blocks are added after mining with valid proof-of-work values. Transactions are recorded for multiple users, including Mahesh, Venkatesh, and Varma.
+
+\subsection{Example 2: Blockchain Validation}
+\begin{verbatim}
+Is the Blockchain valid? True
+\end{verbatim}
+The blockchain is validated to ensure that each block links correctly and the proof-of-work is valid for each block.
+
+\subsection{Example 3: Displaying the Blockchain}
+\begin{verbatim}
+Blockchain:
+Block 0 [Hash: 4e2b9db...]
+Previous Hash: 0
+Data: Genesis Block
+Proof: 0
+Timestamp: 1709478310.123456
+
+Block 1 [Hash: 0000ae34...]
+Previous Hash: 4e2b9db...
+Data: ['Mahesh -> Venkatesh: 50', 'Venkatesh -> Mahesh: 30']
+Proof: 12345
+Timestamp: 1709478325.678912
+
+Block 2 [Hash: 00004812...]
+Previous Hash: 0000ae34...
+Data: ['Varma -> Mahesh: 75', 'Mahesh -> Varma: 20']
+Proof: 23456
+Timestamp: 1709478350.234567
+\end{verbatim}
+This output shows the details of each block in the blockchain, including the block's data, the proof value, the timestamp, and the hash.
+
+\subsection{Example 4: Blockchain Tampering}
+\begin{verbatim}
+Tampered the blockchain.
+Is the Blockchain valid after tampering? False
+\end{verbatim}
+The blockchain’s integrity is verified after tampering with the data. The validation fails, demonstrating the security of the blockchain.
+
+\section{Discussion}
+
+This blockchain implementation provides a simple yet functional example of how a decentralized, secure system works. By using a proof-of-work mechanism, the system ensures that adding blocks to the chain is computationally expensive, which prevents malicious tampering. The system also demonstrates how transactions can be added, mined, and validated, ensuring that users can trust the integrity of the blockchain.
+
+\section{Conclusion}
+
+This project successfully demonstrates the key concepts of blockchain technology, including decentralized transaction management, block mining, and chain validation. The system can handle multiple users, process transactions, and ensure the integrity of the blockchain. Further enhancements could include adding smart contract capabilities or improving the system’s scalability.
+
+\section{Future Work}
+
+The current implementation is a simplified model. Future work could include:
+\begin{itemize}
+    \item \textbf{Improving Security}: Implementing more advanced cryptographic techniques for better data protection.
+    \item \textbf{Smart Contracts}: Introducing smart contract functionality to automate tasks and transactions.
+    \item \textbf{Distributed Ledger}: Expanding the system to support a peer-to-peer network for true decentralization.
+    \item \textbf{Performance Optimization}: Improving the proof-of-work algorithm to reduce mining time.
+\end{itemize}
+
+\section{References}
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}
