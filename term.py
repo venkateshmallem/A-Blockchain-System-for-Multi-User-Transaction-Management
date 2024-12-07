@@ -77,10 +77,15 @@ if __name__ == "__main__":
     blockchain = Blockchain()
     user1 = User("Alice")
     user2 = User("Bob")
+    user1 = User("Mahesh")
+    user2 = User("Venkatesh")
+    
 
     # Users send transactions
     user1.send_transaction(blockchain, "Bob", 50)
     user2.send_transaction(blockchain, "Alice", 30)
+    user1.send_transaction(blockchain, "Venkatesh", 50)
+    user2.send_transaction(blockchain, "Mahesh", 30)
 
     # Mining a new block
     print("Mining a new block...")
